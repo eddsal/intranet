@@ -32,6 +32,11 @@ class Grade
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subject", inversedBy="grades")
+     */
+    private $subject;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Grade
     public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getSubject(): ?Subject
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(?Subject $subject): self
+    {
+        $this->subject = $subject;
 
         return $this;
     }

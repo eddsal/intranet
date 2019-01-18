@@ -5,7 +5,7 @@
 app_logout:
     path: /logout
 
-easy_admin_bundle:
-    resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
-    prefix: /admin
-    type: annotation
+#easy_admin_bundle:
+#    resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
+#    prefix: /admin
+#    type: annotation
