@@ -7,6 +7,10 @@
 </head>
 <body>
 <nav>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_index') }}">Administration</a>
+    {% elseif is_granted('ROLE_TEACHER') %}
+    {% endif %}
     {% if app.user %}
         <a href="{{ path('app_logout') }}">Logout</a> &nbsp;&nbsp;
     {% else %}

@@ -15,7 +15,7 @@ class UserManager
         $this->em = $em;
     }
 
-    public function addUser(User $user)
+    public function saveUser(User $user)
     {
         if (empty($user->getDate())) {
             $user->setDate(new \DateTime());

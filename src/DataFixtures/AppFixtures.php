@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
                     $user['password']
                 )
             );
-            $this->userManager->addUser($person);
+            $this->userManager->saveUser($person);
             if ($user['role'] === ['ROLE_TEACHER']) {
                 $teachers[] = $person;
             }
