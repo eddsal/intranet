@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Student</th>
                 <th>Grade</th>
                 <th>Comment</th>
                 <th>actions</th>
@@ -18,6 +19,7 @@
         {% for grade in grades %}
             <tr>
                 <td>{{ grade.id }}</td>
+                <td>{{ grade.user }}</td>
                 <td>{{ grade.grade }}</td>
                 <td>{{ grade.comment }}</td>
                 <td>

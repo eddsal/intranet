@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Users Administration</h1>
+    <a href="{{ path('user_administration_index') }}">Students</a>
+    <a href="{{ path('user_teacher_administration_index') }}">Teachers</a>
+    <a href="{{ path('user_admin_administration_index') }}">Admins</a>
     <table class="table">
         <thead>
             <tr>

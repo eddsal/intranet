@@ -3,6 +3,7 @@
 {% block title %}Subject{% endblock %}
 
 {% block body %}
+
     <h1>Subject</h1>
 
     <table class="table">
@@ -14,6 +15,47 @@
             <tr>
                 <th>Name</th>
                 <td>{{ subject.name }}</td>
+            </tr>
+            <tr>
+                <th>Registered</th>
+                {% if subject.users is not empty %}
+                   <table border="">
+                       <thead>
+                            <th>
+                                Students
+                            </th>
+                            <th colspan="99999999999">
+                                grades
+                            </th>
+                       </thead>
+                       {% for user in subject.users %}
+                           <tr>
+                               <th>
+                                   <a href="{{ path('user_administration_show', {'id' : user.id}) }}">{{ user }}</a>
+                               </th>
+                               {% for grade in user.grades %}
+                                   <td>
+                                       <a href="{{ path('grade_administration_show', {'id' : grade.id}) }}">{{ grade.grade }}</a>
+                                   </td>
+                               {% endfor %}
+                           </tr>
+                       {% endfor %}
+                   </table>
+                    {#{% for user in subject.users %}#}
+                        {#<td>#}
+                            {#<table>#}
+                                {#<tr>#}
+                                    {#<th>#}
+                                        {#<a href="{{ path('user_administration_show', {'id' : user.id}) }}">{{ user }}</a>#}
+                                    {#</th>#}
+                                {#</tr>#}
+
+                            {#</table>#}
+                        {#</td>#}
+                    {#{% endfor %}#}
+                {% else %}
+                    <td>0 participation</td>
+                {% endif %}
             </tr>
         </tbody>
     </table>

@@ -28,6 +28,34 @@ class UserAdministrationController extends AbstractController
     }
 
     /**
+     * @Route("/student", name="user_student_administration_index", methods={"GET"})
+     */
+    public function student(): Response
+    {
+        $this->redirectToRoute('user_administration_index');
+    }
+
+    /**
+     * @Route("/teacher", name="user_teacher_administration_index", methods={"GET"})
+     */
+    public function teacher(UserRepository $userRepository): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findByRole('ROLE_TEACHER'),
+        ]);
+    }
+
+    /**
+     * @Route("/admin", name="user_admin_administration_index", methods={"GET"})
+     */
+    public function admin(UserRepository $userRepository): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findByRole('ROLE_ADMIN'),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="user_administration_new", methods={"GET","POST"})
      */
     public function new(Request $request, UserManager $userManager, UserPasswordEncoderInterface $passwordEncoder): Response

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Subject;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,8 +15,8 @@ class SubjectType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('user')
-            ->add('users')
+            ->add('user',EntityType::class, ['class' => User::class, 'label' => 'Teacher'])
+            ->add('users', EntityType::class, ['class' => User::class, 'label' => 'registered', 'multiple' => true])
         ;
     }
 
