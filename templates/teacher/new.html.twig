@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grade {{ student.username }}{% endblock %}
+
+{% block body %}
+    <h1>Grade for {{ student.username }}</h1>
+
+    {{ include('teacher/_grade_form.html.twig') }}
+
+    {% if grade.id %}
+        {{ include('teacher/_delete_grade_form.html.twig') }}
+    {% endif %}
+    <a href="{{ path('teacher_subject', {'id': subject.id}) }}">back to subject</a>
+{% endblock %}

@@ -9,7 +9,9 @@
 <nav>
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('admin_index') }}">Administration</a>
+        <a href="{{ path('teacher') }}">Teacher Place</a>
     {% elseif is_granted('ROLE_TEACHER') %}
+        <a href="{{ path('teacher') }}">Teacher Place</a>
     {% endif %}
     {% if app.user %}
         <a href="{{ path('app_logout') }}">Logout</a> &nbsp;&nbsp;

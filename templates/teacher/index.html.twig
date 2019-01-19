@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teacher Place{% endblock %}
+
+{% block body %}
+    <h1>Teacher Place!</h1>
+
+    <h2>My subject</h2>
+    {% if subjects is not empty %}
+        <ul>
+            {% for subject in subjects %}
+                <li>
+                    <a href="{{ path('teacher_subject', {'id' : subject.id}) }}">{{ subject.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        You have 0 subject
+    {% endif %}
+
+{% endblock %}
