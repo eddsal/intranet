@@ -38,4 +38,21 @@ class StudentController extends AbstractController
         }
         return $this->redirectToRoute('student');
     }
+
+    /**
+     * @Route("/grade", name="student_grade")
+     */
+    public function grade(Request $request): Response
+    {
+        $grades = $this->getUser()->getGrades();
+        $div = sizeof($grades) !== 0 ? sizeof($grades) : 1;
+        $average = 0;
+        foreach ($grades as $grade) {
+            $average += $grade->getGrade();
+        }
+        return $this->render('student/grade.html.twig', [
+            'grades' => $grades,
+            'average' => round($average / $div, 2)
+        ]);
+    }
 }
