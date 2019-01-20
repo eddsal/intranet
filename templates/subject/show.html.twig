@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <th>Registered</th>
-                {% if subject.users is not empty %}
+                {% if subject.registered is not empty %}
                    <table border="">
                        <thead>
                             <th>
@@ -28,7 +28,7 @@
                                 grades
                             </th>
                        </thead>
-                       {% for user in subject.users %}
+                       {% for user in subject.registered %}
                            <tr>
                                <th>
                                    <a href="{{ path('user_administration_show', {'id' : user.id}) }}">{{ user }}</a>

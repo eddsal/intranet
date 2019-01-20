@@ -21,7 +21,7 @@ class StudentController extends AbstractController
     public function index(SubjectRepository $subjectRepository): Response
     {
         return $this->render('student/index.html.twig', [
-            'mySubjects' => $this->getUser()->getSubject(),
+            'mySubjects' => $this->getUser()->getSubjects(),
             'subjects' => $subjectRepository->findAll(),
         ]);
     }
@@ -33,7 +33,8 @@ class StudentController extends AbstractController
     {
         $subject = $subjectRepository->find($request->get('id'));
         if (!empty($subject)) {
-            //TODO
+            $user = $this->getUser()->addSubject($subject);
+            $userManager->saveUser($user);
         }
         return $this->redirectToRoute('student');
     }

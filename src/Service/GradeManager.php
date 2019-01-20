@@ -34,10 +34,10 @@ class GradeManager
         if (empty($subject) || empty($student)) {
             $hasRight = false;
         }
-        if ($subject->getUser()->getId() !== $teacher->getId()) {
+        if ($subject->getTeacher()->getId() !== $teacher->getId()) {
             $hasRight = false;
         }
-        if (!in_array($student, $subject->getUsers()->getValues())) {
+        if (!in_array($student, $subject->getRegistered()->getValues())) {
             $hasRight = false;
         }
         return $hasRight;

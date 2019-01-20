@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $userManager->addUser($user);
+            $userManager->saveUser($user);
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_login');

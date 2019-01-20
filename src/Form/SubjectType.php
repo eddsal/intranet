@@ -15,8 +15,8 @@ class SubjectType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('user',EntityType::class, ['class' => User::class, 'label' => 'Teacher'])
-            ->add('users', EntityType::class, ['class' => User::class, 'label' => 'registered', 'multiple' => true])
+            ->add('teacher',EntityType::class, ['class' => User::class, 'label' => 'Teacher'])
+            ->add('registered', EntityType::class, ['class' => User::class, 'label' => 'registered', 'multiple' => true])
         ;
     }
 

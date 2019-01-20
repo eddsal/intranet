@@ -29,7 +29,7 @@ class UserType extends AbstractType
             ])
             ->add('password')
             ->add('date')
-            ->add('subject')
+            ->add('subjects')
         ;
     }
 

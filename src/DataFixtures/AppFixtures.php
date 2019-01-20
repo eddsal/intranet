@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
             $sub = new Subject();
             $sub->setName($subject);
             if ($teachers[$a] !== '') {
-                $sub->setUser($teachers[$a]);
+                $sub->setTeacher($teachers[$a]);
             }
             $a++;
             if ($a === sizeof($teachers)) {

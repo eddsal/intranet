@@ -5,12 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -27,7 +25,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json")
      */
     private $roles = [];
 
@@ -43,7 +41,12 @@ class User implements UserInterface
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Subject", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Subject", mappedBy="teacher")
+     */
+    private $teacher;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subject", mappedBy="registered")
      */
     private $subjects;
 
@@ -52,16 +55,12 @@ class User implements UserInterface
      */
     private $grades;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Subject", inversedBy="users")
-     */
-    private $subject;
-
     public function __construct()
     {
+        $this->name = new ArrayCollection();
+        $this->teacher = new ArrayCollection();
         $this->subjects = new ArrayCollection();
         $this->grades = new ArrayCollection();
-        $this->subject = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +151,37 @@ class User implements UserInterface
     /**
      * @return Collection|Subject[]
      */
+    public function getTeacher(): Collection
+    {
+        return $this->teacher;
+    }
+
+    public function addTeacher(Subject $teacher): self
+    {
+        if (!$this->teacher->contains($teacher)) {
+            $this->teacher[] = $teacher;
+            $teacher->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Subject $teacher): self
+    {
+        if ($this->teacher->contains($teacher)) {
+            $this->teacher->removeElement($teacher);
+            // set the owning side to null (unless already changed)
+            if ($teacher->getTeacher() === $this) {
+                $teacher->setTeacher(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subject[]
+     */
     public function getSubjects(): Collection
     {
         return $this->subjects;
@@ -161,7 +191,7 @@ class User implements UserInterface
     {
         if (!$this->subjects->contains($subject)) {
             $this->subjects[] = $subject;
-            $subject->setUser($this);
+            $subject->addRegistered($this);
         }
 
         return $this;
@@ -171,10 +201,7 @@ class User implements UserInterface
     {
         if ($this->subjects->contains($subject)) {
             $this->subjects->removeElement($subject);
-            // set the owning side to null (unless already changed)
-            if ($subject->getUser() === $this) {
-                $subject->setUser(null);
-            }
+            $subject->removeRegistered($this);
         }
 
         return $this;
@@ -211,17 +238,8 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Subject[]
-     */
-    public function getSubject(): Collection
-    {
-        return $this->subject;
-    }
-
     public function __toString()
     {
         return $this->getUsername();
     }
-
 }

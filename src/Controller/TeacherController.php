@@ -27,7 +27,7 @@ class TeacherController extends AbstractController
     {
         $user = $this->getUser();
         return $this->render('teacher/index.html.twig', [
-            'subjects' => $user->getSubjects(),
+            'subjects' => $user->getTeacher(),
         ]);
     }
 
@@ -43,7 +43,7 @@ class TeacherController extends AbstractController
             return $this->redirectToRoute('teacher');
         }
 
-        if ($subject->getUser()->getId() !== $user->getId()) {
+        if ($subject->getTeacher()->getId() !== $user->getId()) {
             return $this->redirectToRoute('teacher');
         }
 
@@ -115,7 +115,7 @@ class TeacherController extends AbstractController
      */
     public function delete(Request $request, Grade $grade): Response
     {
-        if ($this->getUser()->getId() !== $grade->getSubject()->getUser()->getId()) {
+        if ($this->getUser()->getId() !== $grade->getSubject()->getTeacher()->getId()) {
             return $this->redirectToRoute('teacher_subject', ['id' => $grade->getSubject()->getId()]);
         }
         if ($this->isCsrfTokenValid('delete'.$grade->getId(), $request->request->get('_token'))) {

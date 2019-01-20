@@ -19,11 +19,6 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * @param string $role
-     *
-     * @return array
-     */
     public function findByRole($role)
     {
         $qb = $this->_em->createQueryBuilder();

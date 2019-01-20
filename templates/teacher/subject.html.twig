@@ -5,9 +5,9 @@
 {% block body %}
     <h1>{{ subject.name }}</h1>
 
-    {% if subject.users is not empty %}
+    {% if subject.registered is not empty %}
         <table border="">
-            {% for user in subject.users %}
+            {% for user in subject.registered %}
                 <tr>
                     <th>
                         {{ user.username }}

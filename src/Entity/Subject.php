@@ -19,9 +19,9 @@ class Subject
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="subjects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="teacher")
      */
-    private $user;
+    private $teacher;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -29,9 +29,9 @@ class Subject
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="subject")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="subjects")
      */
-    private $users;
+    private $registered;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Grade", mappedBy="subject")
@@ -40,7 +40,7 @@ class Subject
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->registered = new ArrayCollection();
         $this->grades = new ArrayCollection();
     }
 
@@ -49,14 +49,14 @@ class Subject
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getTeacher(): ?User
     {
-        return $this->user;
+        return $this->teacher;
     }
 
-    public function setUser(?User $user): self
+    public function setTeacher(?User $teacher): self
     {
-        $this->user = $user;
+        $this->teacher = $teacher;
 
         return $this;
     }
@@ -76,26 +76,24 @@ class Subject
     /**
      * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getRegistered(): Collection
     {
-        return $this->users;
+        return $this->registered;
     }
 
-    public function addUser(User $user): self
+    public function addRegistered(User $registered): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addSubject($this);
+        if (!$this->registered->contains($registered)) {
+            $this->registered[] = $registered;
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeRegistered(User $registered): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeSubject($this);
+        if ($this->registered->contains($registered)) {
+            $this->registered->removeElement($registered);
         }
 
         return $this;
