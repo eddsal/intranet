@@ -58,7 +58,9 @@ class AppFixtures extends Fixture
 
         $subjects = ['PHP', 'JS', 'html/css', 'Golang', 'Python', 'android', 'swift'];
 
-        $teachers = [''];
+        $teachers = [];
+        $student = [];
+
 
         foreach ($users as $user) {
             $person = new User();
@@ -74,6 +76,9 @@ class AppFixtures extends Fixture
             if ($user['role'] === ['ROLE_TEACHER']) {
                 $teachers[] = $person;
             }
+            if ($user['role'] === []) {
+                $student[] = $person;
+            }
         }
 
         $a = 0;
@@ -86,6 +91,9 @@ class AppFixtures extends Fixture
             $a++;
             if ($a === sizeof($teachers)) {
                 $a = 0;
+            }
+            foreach ($student as $user) {
+                $sub->addRegistered($user);
             }
             $manager->persist($sub);
         }
