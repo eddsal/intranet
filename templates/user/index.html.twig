@@ -7,13 +7,15 @@
     <a href="{{ path('user_administration_index') }}">Students</a>
     <a href="{{ path('user_teacher_administration_index') }}">Teachers</a>
     <a href="{{ path('user_admin_administration_index') }}">Admins</a>
-    <table class="table">
+    <table class="table" border="">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Username</th>
                 <th>Roles</th>
                 <th>Date</th>
+                <th>teacher of</th>
+                <th>Registed in</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +26,16 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
                 <td>{{ user.date ? user.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    {% for subject in user.teacher %}
+                        <a href="{{ path('subject_administration_show', {'id': subject.id}) }}">{{ subject.name }}</a>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for subject in user.subjects %}
+                        <a href="{{ path('subject_administration_show', {'id': subject.id}) }}">{{ subject.name }}</a>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('user_administration_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_administration_edit', {'id': user.id}) }}">edit</a>

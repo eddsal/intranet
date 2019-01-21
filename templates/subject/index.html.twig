@@ -5,12 +5,13 @@
 {% block body %}
     <h1>Subject Administration</h1>
 
-    <table class="table">
+    <table class="table" border="">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Teacher</th>
+                <th>Register</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,11 @@
                 <td>{{ subject.id }}</td>
                 <td>{{ subject.name }}</td>
                 <td>{{ subject.teacher }}</td>
+                <td>
+                    {% for user in subject.registered %}
+                        <a href="{{ path('user_administration_show', {'id': user.id}) }}">{{ user.username}}</a>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('subject_administration_show', {'id': subject.id}) }}">show</a>
                     <a href="{{ path('subject_administration_edit', {'id': subject.id}) }}">edit</a>
