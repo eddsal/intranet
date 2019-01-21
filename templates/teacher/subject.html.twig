@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teacher Place{% endblock %}
+
+{% block body %}
+    <h1>{{ subject.name }}</h1>
+
+    {% if subject.registered is not empty %}
+        <table border="">
+            {% for user in subject.registered %}
+                <tr>
+                    <th>
+                        {{ user.username }}
+                    </th>
+                    {% for grade in user.grades %}
+                        <td>
+                            <a href="{{ path('teacher_edit_grade', {'id': subject.id, 'grade_id': grade.id}) }}">{{ grade.grade }}</a>
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <a href="{{ path('teacher_new_grade', {'id': subject.id, 'user_id': user.id}) }}">new grade</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>0 participation</p>
+    {% endif %}
+{% endblock %}

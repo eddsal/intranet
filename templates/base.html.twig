@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -9,4 +10,31 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
+=======
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<nav>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_index') }}">Administration</a>
+        <a href="{{ path('teacher') }}">Teacher Place</a>
+    {% elseif is_granted('ROLE_TEACHER') %}
+        <a href="{{ path('teacher') }}">Teacher Place</a>
+    {% endif %}
+    {% if app.user %}
+        <a href="{{ path('student') }}">Home</a>
+        <a href="{{ path('student_grade') }}">My Grades</a>
+        <a href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ path('app_login') }}">Login</a>
+        <a href="{{ path('app_register') }}">Register</a>
+    {% endif %}
+</nav>
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+>>>>>>> b138e80aeb24d53e3e0a48ba34741c5b59ac0390
 </html>

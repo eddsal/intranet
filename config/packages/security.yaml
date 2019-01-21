@@ -1,13 +1,38 @@
 security:
+<<<<<<< HEAD
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+=======
+    encoders:
+        App\Entity\User:
+            algorithm: argon2i
+
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+        # used to reload user from session & other features (e.g. switch_user)
+>>>>>>> b138e80aeb24d53e3e0a48ba34741c5b59ac0390
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+<<<<<<< HEAD
+=======
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path:   app_logout
+                target: app_login
+>>>>>>> b138e80aeb24d53e3e0a48ba34741c5b59ac0390
 
             # activate different ways to authenticate
 
@@ -20,6 +45,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+<<<<<<< HEAD
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 	# - { path: ^/prof, roles: ROLE_PROF }		
+=======
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/teacher, roles: [ROLE_ADMIN, ROLE_TEACHER] }
+        - { path: ^/student, roles: ROLE_USER }
+>>>>>>> b138e80aeb24d53e3e0a48ba34741c5b59ac0390

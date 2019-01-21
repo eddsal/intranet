@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subject{% endblock %}
+
+{% block body %}
+
+    <h1>Subject</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ subject.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ subject.name }}</td>
+            </tr>
+            <tr>
+                <th>Registered</th>
+                {% if subject.registered is not empty %}
+                   <table border="">
+                       <thead>
+                            <th>
+                                Students
+                            </th>
+                            <th colspan="99999999999">
+                                grades
+                            </th>
+                       </thead>
+                       {% for user in subject.registered %}
+                           <tr>
+                               <th>
+                                   <a href="{{ path('user_administration_show', {'id' : user.id}) }}">{{ user }}</a>
+                               </th>
+                               {% for grade in user.grades %}
+                                   <td>
+                                       <a href="{{ path('grade_administration_show', {'id' : grade.id}) }}">{{ grade.grade }}</a>
+                                   </td>
+                               {% endfor %}
+                           </tr>
+                       {% endfor %}
+                   </table>
+                {% else %}
+                    <td>0 participation</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('subject_administration_index') }}">back to list</a>
+
+    <a href="{{ path('subject_administration_edit', {'id': subject.id}) }}">edit</a>
+
+    {{ include('subject/_delete_form.html.twig') }}
+{% endblock %}
