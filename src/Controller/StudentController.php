@@ -42,17 +42,13 @@ class StudentController extends AbstractController
     /**
      * @Route("/grade", name="student_grade")
      */
-    public function grade(Request $request): Response
+    public function grade(Request $request, UserManager $userManager): Response
     {
-        $grades = $this->getUser()->getGrades();
-        $div = sizeof($grades) !== 0 ? sizeof($grades) : 1;
-        $average = 0;
-        foreach ($grades as $grade) {
-            $average += $grade->getGrade();
-        }
+        $user = $this->getUser();
+        $grades = $user->getGrades();
         return $this->render('student/grade.html.twig', [
             'grades' => $grades,
-            'average' => round($average / $div, 2)
+            'average' => $userManager->getAverage($user),
         ]);
     }
 }

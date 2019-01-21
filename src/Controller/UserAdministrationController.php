@@ -80,10 +80,11 @@ class UserAdministrationController extends AbstractController
     /**
      * @Route("/{id}", name="user_administration_show", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function show(User $user, UserManager $userManager): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'average' => $userManager->getAverage($user),
         ]);
     }
 

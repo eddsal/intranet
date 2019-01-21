@@ -13,9 +13,11 @@
                         {{ user.username }}
                     </th>
                     {% for grade in user.grades %}
-                        <td>
-                            <a href="{{ path('teacher_edit_grade', {'id': subject.id, 'grade_id': grade.id}) }}">{{ grade.grade }}</a>
-                        </td>
+                        {% if grade.subject.name == subject.name %}
+                            <td>
+                                <a href="{{ path('teacher_edit_grade', {'id': subject.id, 'grade_id': grade.id}) }}">{{ grade.grade }}</a>
+                            </td>
+                        {% endif %}
                     {% endfor %}
                     <td>
                         <a href="{{ path('teacher_new_grade', {'id': subject.id, 'user_id': user.id}) }}">new grade</a>
