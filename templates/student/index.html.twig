@@ -3,15 +3,17 @@
 {% block title %}Student Place{% endblock %}
 
 {% block body %}
+    <div class="jumbotron text-center">
+    
+        <h1>Student Place!</h1>
+    </div>
+        <h2>My subject</h2>
 
-    <h1>Student Place!</h1>
-
-    <h2>My subject</h2>
-
+    
     {% if mySubjects is not empty %}
-        <ul>
+        <ul class="list-group">
             {% for subject in mySubjects %}
-                <li><a href="">{{ subject.name }}</a></li>
+                <li class="list-group-item list-group-item-action"><a href="">{{ subject.name }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
@@ -20,9 +22,9 @@
 
     {% if subjects is not empty %}
         <h2>All Subjects</h2>
-        <ul>
+        <ul class="list-group">
             {% for subject in subjects %}
-                <li>{{ subject.name }} <a href="{{ path('student_register', {'id': subject.id}) }}">register</a></li>
+                <li  class="list-group-item list-group-item-action">{{ subject.name }} <a href="{{ path('student_register', {'id': subject.id}) }}">register</a></li>
             {% endfor %}
         </ul>
     {% endif %}
