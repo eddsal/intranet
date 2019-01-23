@@ -39,3 +39,4 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/teacher, roles: [ROLE_ADMIN, ROLE_TEACHER] }
         - { path: ^/student, roles: ROLE_USER }
+        # (IsGranted) - { path: ^/, roles: ROLE_USER }
