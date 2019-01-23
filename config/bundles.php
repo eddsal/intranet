@@ -15,8 +15,5 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
-<<<<<<< HEAD
-=======
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
->>>>>>> b138e80aeb24d53e3e0a48ba34741c5b59ac0390
 ];
