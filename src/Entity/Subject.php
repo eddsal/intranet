@@ -30,7 +30,7 @@ class Subject
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="subjects")
-     */
+     */ 
     private $registered;
 
     /**
